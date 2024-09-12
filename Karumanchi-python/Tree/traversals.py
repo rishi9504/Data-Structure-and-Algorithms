@@ -1,8 +1,11 @@
+
+from collections import deque
+from binaryTree import BinaryTreeNode
+
 # Preorder Traversal
 # Visit the root node first
 # Then visit the left subtree
 # Then visit the right subtree
-
 def preOrderRecusrsive(root):
     if root:
         print(root.data)
@@ -83,4 +86,42 @@ def levelOrder(root):
                 q.put(root.left)
             if root.right:
                 q.put(root.right)
+
+# give an algorithm for printing the level order data in reverse order
+
+def levelOrderTraversalInReverse(root):
+    q = deque()
+    q.append(root)
+    ans = deque()
+    while q:
+        node = q.popleft()
+        if node is None:
+            continue
+
+        ans.appendleft(node.data)
+
+        if node.right:
+            q.append(node.right)
+
+        if node.left:
+            q.append(node.left)
+
+    return ans
+
+def test():
+    root = BinaryTreeNode(1)
+    root.left = BinaryTreeNode(2)
+    root.right = BinaryTreeNode(3)
+    root.left.left = BinaryTreeNode(4)
+    root.left.right = BinaryTreeNode(5)
+    root.right.left = BinaryTreeNode(6)
+    root.right.right = BinaryTreeNode(7)
+    
+    print("level order traversal")
+    levelOrder(root)
+
+
+if __name__ == '__main__':
+    test()  
+
 
