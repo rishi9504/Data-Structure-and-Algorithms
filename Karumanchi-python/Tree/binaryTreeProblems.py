@@ -1,6 +1,7 @@
 # give an algorithm for finding maximum element in binary tree
 # time complexity O(n)
 import queue
+from binaryTree import BinaryTreeNode
 
 
 maxData = float('-inf')
@@ -180,3 +181,53 @@ def numberOfLeafNodes(root):
             q.put(root.right)
     return count
 
+# give an algorithm for finding the number of full nodes in the binary tree without recursion
+
+def numberOfFullNodes(root):
+    if root is None:
+        return 0
+    q = queue.Queue()
+    q.put(root)
+    count = 0
+    while not q.empty():
+        root = q.get()
+        if root.left is not None and root.right is not None:
+            count += 1
+        if root.left is not None:
+            q.put(root.left)
+        if root.right is not None:
+            q.put(root.right)
+    return count
+
+# give an algorithm for finding the number of half nodes in the binary tree without recursion
+
+def numberOfHalfNodes(root):
+    if root is None:
+        return 0
+    q = queue.Queue()
+    q.put(root)
+    count = 0
+    while not q.empty():
+        root = q.get()
+        if (root.left is not None and root.right is None) or (root.left is None and root.right is not None):
+            count += 1
+        if root.left is not None:
+            q.put(root.left)
+        if root.right is not None:
+            q.put(root.right)
+    return count
+
+def test():
+    root = BinaryTreeNode(1)
+    root.left = BinaryTreeNode(2)
+    root.right = BinaryTreeNode(3)
+    root.left.left = BinaryTreeNode(4)
+    root.left.right = BinaryTreeNode(5)
+    root.right.left = BinaryTreeNode(6)
+    root.right.right = BinaryTreeNode(7)
+
+    # change the method name here to test other functions
+    print(numberOfHalfNodes(root))
+
+if __name__ == '__main__':
+    test()      
