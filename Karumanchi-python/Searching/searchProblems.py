@@ -215,3 +215,23 @@ def majorityElement(arr):
     return majority
 
 print (majorityElement([1, 2, 5, 2, 5, 2, 5, 3, 5]))
+
+
+# given an array of n elements, how do you check whether the list is pairwise sorted? 
+
+def checkPairwiseSorted(arr):
+    """
+    Checks whether the list is pairwise sorted.
+
+    Parameters:
+        arr (list): The array to check for pairwise sorted
+
+    Returns:
+        bool: True if the list is pairwise sorted, False otherwise
+    """
+    if arr is None or len(arr) < 2:
+        return None
+    for i in range(len(arr) - 1):
+        if arr[i] > arr[i + 1]:
+            return False
+    return True
