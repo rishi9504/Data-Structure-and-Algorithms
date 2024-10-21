@@ -5,6 +5,7 @@ class Node:
         self.left = None
         self.right = None
 
+
 # Define the Binary Search Tree class
 class BinarySearchTree:
     def __init__(self):
@@ -19,15 +20,21 @@ class BinarySearchTree:
 
     # Recursive helper function to insert a new key
     def _insert_rec(self, root, key):
+        # Check if the key to insert is less than the current node's key
         if key < root.key:
+            # If the left child is None, insert the new key here
             if root.left is None:
                 root.left = Node(key)
             else:
+                # Otherwise, recursively call the function on the left child
                 self._insert_rec(root.left, key)
+        # Check if the key to insert is greater than the current node's key
         elif key > root.key:
+            # If the right child is None, insert the new key here
             if root.right is None:
                 root.right = Node(key)
             else:
+                # Otherwise, recursively call the function on the right child
                 self._insert_rec(root.right, key)
 
     # Delete a key from the BST
