@@ -100,40 +100,7 @@ def deleteMiddle(head):
 
 
 def partition(head, x):
-    """
-    This function will partition a linked list around a value x
-    :param head: the head of the linked list
-    :param x: the value to partition around
-    :return: the head of the modified linked list
-    """
-    # if the list is empty, then there is nothing to partition
-    if head == None:
-        return None
-
-    # prev is a pointer that will point to the node right before the partition
-    prev = head
-    # set prev's next pointer to point to the head of the list
-    prev.next = head
-
-    # slow is a pointer that will move one node at a time
-    slow = prev
-
-    # fast is a pointer that will move two nodes at a time
-    fast = head
-
-    # while the fast pointer is not None or the fast pointer's next pointer is not None
-    while fast != None and fast.next != None:
-        # move the slow pointer to the next node
-        slow = slow.next
-        # move the fast pointer to the node after the next node
-        fast = fast.next.next
-
-    # at this point, the slow pointer should be pointing to the node right before the partition
-    # so we can just set the next pointer of the slow pointer to point to the node after the partition
-    slow.next = slow.next.next
-
-    # and we can return the head of the modified linked list
-    return prev.next
+    pass
 
 
 # Sum Lists: You have two numbers represented by a linked list, where each node contains a single
