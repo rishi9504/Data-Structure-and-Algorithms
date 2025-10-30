@@ -1,0 +1,2 @@
+Following this course [Data Structures and Algorithms Mega Course – Master Technical Interviews in 49 Hours](https://www.youtube.com/watch?v=xwI5OBEnsZU&t=9007s)
+Course is in Java, coding it alongside in Python
