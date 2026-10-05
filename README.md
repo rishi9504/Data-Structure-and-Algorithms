@@ -750,3 +750,8 @@ def expandAroundCenter(s: str, left: int, right: int) -> int:
 1. **Longest Palindromic Subsequence (LPS)**: Use a 2D DP table to track the longest subsequences.
 2. **Longest Palindromic Substring (LPSstr)**: Can be solved using a 2D DP table or an optimized **Expand Around Center** approach.
 
+
+
+## DSA Knowledge Map app
+
+The planned React app will live in `apps/dsa-knowledge-map/`. See [the app plan](codex/PLAN.md) and [ordered Codex prompts](codex/RUNBOOK.md). Both this repository and [Leetcode](https://github.com/rishi9504/Leetcode) feed the catalog; the external Leetcode repository remains read-only. Start with [discovery](codex/00-discovery.md).

@@ -1,0 +1,25 @@
+{
+  "sources": [
+    {
+      "id": "learning",
+      "url": "https://github.com/rishi9504/Data-Structure-and-Algorithms",
+      "branch": null,
+      "includePaths": [
+        "Striver/"
+      ],
+      "excludePaths": [
+        "apps/",
+        "codex/"
+      ],
+      "role": "notes-and-solutions"
+    },
+    {
+      "id": "leetcode",
+      "url": "https://github.com/rishi9504/Leetcode",
+      "branch": null,
+      "includePaths": [],
+      "excludePaths": [],
+      "role": "submission-artifacts"
+    }
+  ]
+}
