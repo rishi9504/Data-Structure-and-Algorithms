@@ -755,3 +755,7 @@ def expandAroundCenter(s: str, left: int, right: int) -> int:
 ## DSA Knowledge Map app
 
 The planned React app will live in `apps/dsa-knowledge-map/`. See [the app plan](codex/PLAN.md) and [ordered Codex prompts](codex/RUNBOOK.md). Both this repository and [Leetcode](https://github.com/rishi9504/Leetcode) feed the catalog; the external Leetcode repository remains read-only. Start with [discovery](codex/00-discovery.md).
+
+### Working revision studio
+
+[Recall](apps/dsa-knowledge-map/README.md) is now implemented: 29 tree questions from the tracker, 10 interactive animations, Python notes, active recall, local revision tracking and backups. See [verification](apps/dsa-knowledge-map/VERIFICATION.md) and [Lightsail deployment](apps/dsa-knowledge-map/deploy/LIGHTSAIL.md). Deployment is pending server access; the birthday app has not been changed.

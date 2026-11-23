@@ -1,0 +1,8 @@
+# Append as a NEW site block to the existing Caddyfile.
+# Replace dsa.example.com with the selected Recall hostname.
+# If Caddy is in Docker, join ONLY recall to its proxy network and use
+# reverse_proxy recall:8080 instead. Container localhost is not host localhost.
+dsa.example.com {
+    encode zstd gzip
+    reverse_proxy 127.0.0.1:8092
+}
