@@ -1,0 +1,13 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {makeTrace,parseTree} from '../src/engine.js';
+import {schedule,validateProgress,mergeProgress,isDue} from '../src/progress.js';
+const result=(mode,tree)=>makeTrace(mode,tree).frames.at(-1).result;
+test('Traversals follow distinct visit contracts',()=>{const a=[1,2,3,4,5];assert.deepEqual(result('preorder',a),[1,2,4,5,3]);assert.deepEqual(result('inorder',a),[4,2,5,1,3]);assert.deepEqual(result('postorder',a),[4,5,2,3,1]);});
+test('Max path sum handles forks, all negatives and empty root',()=>{assert.equal(result('gain',[-10,9,20,null,null,15,7]),42);assert.equal(result('gain',[-3,-8,-1]),-1);assert.equal(result('gain',[]),null);assert.equal(result('gain',[1,2,3]),6);});
+test('Diameter is edges and can be inside a subtree',()=>{assert.equal(result('diameter',[1]),0);assert.equal(result('diameter',[1,2,3,4,5]),3);assert.equal(result('diameter',[1,2,null,3,4,5,null,null,6]),4);});
+test('Balance sentinel propagates from lower subtrees',()=>{assert.equal(result('balanced',[1,2,2,3,3,null,null,4,4]),false);assert.equal(result('balanced',[]),true);assert.equal(result('depth',[1,null,2,null,3]),3);});
+test('BFS freezes levels; zigzag only reverses output',()=>{assert.deepEqual(result('level',[1,2,3,4,5,null,7]),[[1],[2,3],[4,5,7]]);assert.deepEqual(result('zigzag',[1,2,3,4,5,null,7]),[[1],[3,2],[4,5,7]]);assert.deepEqual(result('right',[1,2,3,4,5,null,7]),[1,3,7]);assert.deepEqual(result('level',[]),[]);});
+test('Input validates structure, size and values',()=>{for(const a of [[null,1],[1,null,null,2],[1,'2'],[Infinity],Array(64).fill(1),{},[1000001]])assert.throws(()=>parseTree(a));assert.equal(parseTree([1,null,2,3]).nodes.length,3);assert.equal(parseTree([1,1,1]).nodes.length,3);});
+test('Trace snapshots cannot be mutated by later steps',()=>{const {frames}=makeTrace('gain',[1,2,3]);assert.deepEqual(frames[0].visited,[]);assert.deepEqual(frames[0].returned,{});assert.notEqual(frames[1].stack,frames[2].stack);});
+test('Reviews use calendar days and backups validate before import',()=>{assert.equal(schedule('good',new Date(2026,10,27,23,50)),'2026-12-04');assert.equal(schedule('again',new Date(2026,11,31)),'2027-01-01');assert.throws(()=>validateProgress({records:{}}));assert.throws(()=>validateProgress({schemaVersion:1,records:{a:{status:'ready',note:'',reviews:[]}}}));const r={status:'revise',note:'hello',reviews:[{at:'2026-11-23T12:00:00Z',rating:'good',due:'2026-11-30'}]};assert.deepEqual(validateProgress({schemaVersion:1,records:{a:r}}),{a:r});assert.equal(isDue(r,new Date(2026,10,29)),false);assert.equal(isDue(r,new Date(2026,10,30)),true);assert.equal(mergeProgress({a:r},{a:r}).a.reviews.length,1);});
